@@ -1,0 +1,50 @@
+name: FlashTix
+options:
+  bundleIdPrefix: com.imindesign96
+  deploymentTarget:
+    iOS: "17.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    DEVELOPMENT_TEAM: ""
+configs:
+  Debug: debug
+  Release: release
+targets:
+  FlashTix:
+    type: application
+    platform: iOS
+    sources:
+      - App
+      - Core
+      - Features
+      - Resources
+    configFiles:
+      Debug: Configs/Debug.xcconfig
+      Release: Configs/Release.xcconfig
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: FlashTix
+        UILaunchScreen: {}
+        FLASHTIX_API_BASE_URL: $(FLASHTIX_API_BASE_URL)
+        NSAppTransportSecurity:
+          NSAllowsLocalNetworking: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.imindesign96.FlashTix
+        CURRENT_PROJECT_VERSION: 1
+        MARKETING_VERSION: 0.1.0
+        TARGETED_DEVICE_FAMILY: "1"
+  FlashTixTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - Tests
+    dependencies:
+      - target: FlashTix
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.imindesign96.FlashTixTests
