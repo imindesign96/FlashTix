@@ -23,12 +23,20 @@ jobs:
         run: brew install xcodegen
       - name: Generate project
         run: xcodegen generate
-      - name: Build app
+      - name: Select simulator
+        run: |
+          SIMULATOR_UDID=$(xcrun simctl list devices available --json | jq -r '[.devices[][] | select(.isAvailable == true and (.name | startswith("iPhone")))] | first | .udid')
+          if [ -z "$SIMULATOR_UDID" ] || [ "$SIMULATOR_UDID" = "null" ]; then
+            echo "No available iPhone simulator was found."
+            exit 1
+          fi
+          echo "SIMULATOR_UDID=$SIMULATOR_UDID" >> "$GITHUB_ENV"
+      - name: Build and test
         run: >-
           xcodebuild
           -project FlashTix.xcodeproj
           -scheme FlashTix
           -configuration Debug
-          -sdk iphonesimulator
+          -destination "platform=iOS Simulator,id=${SIMULATOR_UDID}"
           CODE_SIGNING_ALLOWED=NO
-          build
+          test
