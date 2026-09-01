@@ -7,10 +7,10 @@ db-down:
 	docker compose down
 
 api-up:
-	cd backend && gradle bootRun
+	cd backend && ./gradlew bootRun
 
 api-test:
-	cd backend && gradle test
+	cd backend && ./gradlew test
 
 ios-project:
 	cd ios && xcodegen generate

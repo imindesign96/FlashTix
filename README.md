@@ -42,7 +42,7 @@ Run the backend:
 
 ```bash
 cd backend
-gradle bootRun
+./gradlew bootRun
 ```
 
 The API defaults to `http://localhost:8080`.
