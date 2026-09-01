@@ -32,3 +32,10 @@ management:
     health:
       probes:
         enabled: true
+
+flashtix:
+  auth:
+    issuer: ${JWT_ISSUER:flashtix-api}
+    signing-secret: ${JWT_SIGNING_SECRET:flashtix-local-dev-secret-32byte}
+    access-token-ttl: ${ACCESS_TOKEN_TTL:15m}
+    refresh-token-ttl: ${REFRESH_TOKEN_TTL:30d}

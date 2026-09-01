@@ -14,6 +14,26 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: flashtix
+          POSTGRES_USER: flashtix
+          POSTGRES_PASSWORD: flashtix
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U flashtix -d flashtix"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 10
+    env:
+      DB_URL: jdbc:postgresql://localhost:5432/flashtix
+      DB_USERNAME: flashtix
+      DB_PASSWORD: flashtix
+      JWT_SIGNING_SECRET: ci-only-signing-secret-with-32-bytes
+      FLASHTIX_RUN_INTEGRATION_TESTS: "true"
     defaults:
       run:
         working-directory: backend
@@ -24,6 +44,4 @@ jobs:
           distribution: temurin
           java-version: "21"
       - uses: gradle/actions/setup-gradle@v4
-        with:
-          gradle-version: "8.14"
-      - run: gradle test --no-daemon
+      - run: ./gradlew test --no-daemon

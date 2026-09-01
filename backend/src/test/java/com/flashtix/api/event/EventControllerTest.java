@@ -3,10 +3,12 @@ package com.flashtix.api.event;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.time.Instant;
+import java.time.Clock;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,6 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(EventController.class)
+@AutoConfigureMockMvc(addFilters = false)
 class EventControllerTest {
 
     @Autowired
@@ -23,6 +26,9 @@ class EventControllerTest {
 
     @MockitoBean
     private EventQueryService service;
+
+    @MockitoBean
+    private Clock clock;
 
     @Test
     void list_returnsUpcomingEvents() throws Exception {
