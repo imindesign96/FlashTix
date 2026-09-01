@@ -14,7 +14,7 @@ FlashTix/
 
 ## Product scope
 
-The first vertical slice is deliberately small: browse events from the backend and render them in the iOS home feed. Booking, ticket holds, authentication, realtime inventory, and payments will be added incrementally so each architectural decision is driven by a real problem.
+The first vertical slice browses events from the backend and renders them in the iOS home feed. The second adds email authentication, secure mobile session storage, refresh-token rotation, and coordinated `401` recovery. Booking, ticket holds, realtime inventory, and payments will continue to be added incrementally so each architectural decision is driven by a real problem.
 
 ## Local development
 

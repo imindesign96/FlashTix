@@ -10,12 +10,12 @@
 
 ## Iteration 2 — Authentication
 
-- Sign up / sign in
-- Access + refresh tokens
-- Keychain storage
-- Single-flight refresh using an actor
-- Request retry policy with cancellation awareness
-- Authentication integration tests
+- [x] Sign up / sign in
+- [x] Short-lived JWT access tokens and rotating refresh sessions
+- [x] Keychain storage
+- [x] Single-flight refresh using an actor
+- [x] Request retry policy with cancellation awareness
+- [x] Authentication integration and concurrency tests
 
 ## Iteration 3 — Feed at scale
 
