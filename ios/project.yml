@@ -28,6 +28,8 @@ targets:
       path: App/Info.plist
       properties:
         CFBundleDisplayName: FlashTix
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen: {}
         FLASHTIX_API_BASE_URL: $(FLASHTIX_API_BASE_URL)
         NSAppTransportSecurity:
